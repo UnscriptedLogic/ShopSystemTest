@@ -9,6 +9,12 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        items.Clear();
         items = new Hashtable();
 
         for (int i = 0; i < shopItems.Length; i++)
@@ -24,7 +30,7 @@ public class ShopManager : MonoBehaviour
 
     public void RemoveItemAtIndex(int index)
     {
-        if (items.ContainsKey(index))
+        if (hasItemAtIndex(index))
         {
             items.Remove(index);
             return;
@@ -35,7 +41,7 @@ public class ShopManager : MonoBehaviour
 
     public void OverrideItemAtIndex(int index, ShopItem shopItem)
     {
-        if (items.ContainsKey(index))
+        if (hasItemAtIndex(index))
         {
             items[index] = shopItem;
             return;
@@ -46,7 +52,7 @@ public class ShopManager : MonoBehaviour
 
     public ShopItem GetItemAt(int index)
     {
-        if (items.ContainsKey(index))
+        if (hasItemAtIndex(index))
         {
             return (ShopItem)items[index];
         }
@@ -63,6 +69,11 @@ public class ShopManager : MonoBehaviour
     public bool hasItem(ShopItem shopItem)
     {
         return items.ContainsValue(shopItem);
+    }
+
+    public Hashtable GetAllItems()
+    {
+        return items;
     }
 
     public void LogIndexWarning(int index)
